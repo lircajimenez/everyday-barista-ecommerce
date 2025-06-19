@@ -1,8 +1,8 @@
-import Carousel from "@/components/Carousel";
-import { Button } from "@/components/ui/button";
-import { stripe } from "@/lib/stripe";
 import Image from "next/image";
 import Link from "next/link";
+import { stripe } from "@/lib/stripe";
+import { Button } from "@/components/ui/button";
+import Carousel from "@/components/Carousel";
 
 export default async function Home() {
   const products = await stripe.products.list({
