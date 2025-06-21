@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCartStore } from "@/store/cart-store";
 import { ShoppingCartIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button } from "./ui/button";
+import logo from "@/public/everyday-barista-logo.png";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
@@ -25,9 +27,9 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow">
-      <div className="container mx-auto flex items-center justify-between px-4 py-4">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2">
         <Link className="hover:text-blue-600" href="/">
-          Everyday Barista
+          <Image alt="Everyday Barista logo" width={60} height={60} src={logo} />
         </Link>
         <div className="hidden md:flex space-x-6">
           <Link href="/">Homepage</Link>
