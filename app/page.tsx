@@ -2,48 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { stripe } from "@/lib/stripe";
 import { Button } from "@/components/ui/button";
-import Carousel from "@/components/Carousel";
 import hero from "@/public/hero-01.webp";
 import ProductCard from "@/components/product-card";
 import CategoryCard from "@/components/category-card";
+import categories from "@/lib/categories";
 
 export default async function Home() {
-  const products = await stripe.products.list({
-    expand: ["data.default_price"],
-    // limit: 5,
-    limit: 8,
-  });
+  // Fetch a few products for each category
+  const productsByCategory: { [category: string]: any[] } = {};
+  for (const category of categories) {
+    const result = await stripe.products.search({
+      query: `metadata['category']:'${category}'`,
+      limit: 1, // Only fetch a few for preview
+      expand: ["data.default_price"],
+    });
+    productsByCategory[category] = result.data;
+  }
 
-  const category = await stripe.products.search({
-    query: "metadata['category']:'espresso machines'",
-  });
-
-  console.log(products);
-  console.log(category);
   return (
     <div>
-      {/* <section className="rounded bg-neutral-100 py-8 sm:py-12">
-        <div className="mx-auto grid grid-cols-1 items-center justify-items-center gap-8 px-8 sm:px-16 md:grid-cols-2">
-          <div className="max-w-md space-y-4">
-            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Your Ritual. Your Gear.</h2>
-            <p className="text-neutral-600">Great gear. Great coffee. Every day.</p>
-            <Button
-              className="inline-flex items-center justify-center rounded-full px-6 py-3 bg-black text-white"
-              asChild
-              variant="default"
-            >
-              <Link className="inline-flex items-center justify-center rounded-full px-6 py-3" href="/products">
-                Browse All Products
-              </Link>
-            </Button>
-          </div>
-          <Image alt="Banner Image" width={450} height={450} src={products.data[0].images[0]} />
-        </div>
-      </section> */}
       <section className="relative h-screen min-h-[600px] flex items-center justify-center">
         <div className="absolute inset-0">
-          {/* <Image alt="Coffee brewing background" fill src={products.data[0].images[0]} className="object-cover" priority /> */}
-          <Image alt="Coffee brewing background" fill src={hero} className="object-cover" priority />
+          <Image alt="Coffee products background" fill src={hero} className="object-cover" priority />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
@@ -64,20 +44,19 @@ export default async function Home() {
         </div>
       </section>
       <section className="py-8">
-        {/* <Carousel products={products.data} /> */}
-        <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {/* {products.data &&
-            products.data.map((product, key) => (
-              <li key={key}>
-                <ProductCard product={product} />
-              </li>
-            ))} */}
-          {products.data &&
-            products.data.map((product, key) => (
-              <li key={key}>
+        <h2 className="text-2xl font-bold capitalize mb-5">Categories</h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {categories.map((category) => {
+            // Get the first product in this category (for image/info)
+            const product = productsByCategory[category][0];
+            if (!product) return null; // Skip if no product for this category
+
+            return (
+              <li key={category}>
                 <CategoryCard product={product} />
               </li>
-            ))}
+            );
+          })}
         </ul>
       </section>
     </div>

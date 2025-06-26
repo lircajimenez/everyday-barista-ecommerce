@@ -3,9 +3,7 @@ import { stripe } from "@/lib/stripe";
 import { formatDashString } from "@/lib/utils/string";
 
 async function CategoryPage({ params }: { params: { category: string } }) {
-  // Support for catch-all route: /products/category/[...category]
   const category = params.category;
-  console.log("category", category);
 
   // Search for products in the specified category
   const categoryProducts = await stripe.products.search({
