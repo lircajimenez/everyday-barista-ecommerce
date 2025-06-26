@@ -11,17 +11,11 @@ interface Props {
 function CategoryCard({ product }: Props) {
   const price = product.default_price as Stripe.Price;
   return (
-    <Link className="block h-full" href={`/products/${product.id}`}>
+    <Link className="block h-full" href={`/products/category/${product.metadata.category}`}>
       <Card className="group hover:shadow-2xl transition duration-300 rounded-xl border py-0 h-full flex flex-col border-gray-300 gap-0 ">
         {product.images && product.images[0] && (
           <div className="relative h-60 w-full">
-            <Image
-              className="group-hover:opacity-90 transition-opacity duration-300 rounded-t-lg"
-              layout="fill"
-              objectFit="cover"
-              alt={product.name}
-              src={product.images[0]}
-            />
+            <Image className="group-hover:opacity-90 transition-opacity duration-300 rounded-t-lg" layout="fill" objectFit="cover" alt={product.name} src={product.images[0]} />
           </div>
         )}
 
