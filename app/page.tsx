@@ -3,7 +3,6 @@ import Link from "next/link";
 import { stripe } from "@/lib/stripe";
 import { Button } from "@/components/ui/button";
 import hero from "@/public/hero-01.webp";
-import ProductCard from "@/components/product-card";
 import CategoryCard from "@/components/category-card";
 import categories from "@/lib/categories";
 
@@ -13,7 +12,7 @@ export default async function Home() {
   for (const category of categories) {
     const result = await stripe.products.search({
       query: `metadata['category']:'${category}'`,
-      limit: 1, // Only fetch a few for preview
+      limit: 1,
       expand: ["data.default_price"],
     });
     productsByCategory[category] = result.data;
@@ -47,7 +46,6 @@ export default async function Home() {
         <h2 className="text-2xl font-bold capitalize mb-5">Categories</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category) => {
-            // Get the first product in this category (for image/info)
             const product = productsByCategory[category][0];
             if (!product) return null; // Skip if no product for this category
 

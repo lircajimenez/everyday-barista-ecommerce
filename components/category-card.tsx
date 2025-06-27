@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Stripe from "stripe";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardTitle } from "./ui/card";
 import { formatDashString } from "@/lib/utils/string";
 
 interface Props {
