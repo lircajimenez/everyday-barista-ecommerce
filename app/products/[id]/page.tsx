@@ -3,6 +3,8 @@ import { stripe } from "@/lib/stripe";
 
 async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  // const logging = await params;
+  // console.log("params", logging);
   const product = await stripe.products.retrieve(id, { expand: ["default_price"] });
   // pass plain objects from server to client to get rid of error
   const plainProduct = JSON.parse(JSON.stringify(product));
