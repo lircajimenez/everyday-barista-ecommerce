@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCartStore } from "@/store/cart-store";
-import { ShoppingCartIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon, Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Button } from "./ui/button";
 import logo from "@/public/everyday-barista-logo.png";
 
@@ -42,6 +42,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-4">
+          <Link className="relative" href="/products">
+            <MagnifyingGlassIcon className="h-6 w-6" />
+          </Link>
           <Link className="relative" href="/checkout">
             <ShoppingCartIcon className="h-6 w-6" />
             {cartCount > 0 && (

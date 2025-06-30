@@ -7,7 +7,6 @@ import CategoryCard from "@/components/category-card";
 import categories from "@/lib/categories";
 
 export default async function Home() {
-  // Fetch a few products for each category
   const productsByCategory: { [category: string]: any[] } = {};
   for (const category of categories) {
     const result = await stripe.products.search({

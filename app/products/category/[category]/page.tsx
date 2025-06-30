@@ -2,8 +2,8 @@ import ProductList from "@/components/product-list";
 import { stripe } from "@/lib/stripe";
 import { formatDashString } from "@/lib/utils/string";
 
-async function CategoryPage({ params }: { params: { category: string } }) {
-  const category = params.category;
+async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
 
   // Search for products in the specified category
   const categoryProducts = await stripe.products.search({
