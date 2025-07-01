@@ -18,8 +18,8 @@ function ProductCard({ product }: Props) {
           <div className="relative h-60 w-full">
             <Image
               className="group-hover:opacity-90 transition-opacity duration-300 rounded-t-lg"
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              objectFit="contain" //"cover" ?
               alt={product.name}
               src={product.images[0]}
             />
