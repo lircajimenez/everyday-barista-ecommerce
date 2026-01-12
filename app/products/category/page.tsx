@@ -1,11 +1,12 @@
 import Link from "next/link";
+import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import categories from "@/lib/categories";
 import ProductCard from "@/components/product-card";
 import Breadcrumb from "@/components/breadcrumb";
 
 async function CategoryPage() {
-  const productsByCategory: { [category: string]: any[] } = {};
+  const productsByCategory: { [category: string]: Stripe.Product[] } = {};
   for (const category of categories) {
     const result = await stripe.products.search({
       query: `metadata['category']:'${category}'`,

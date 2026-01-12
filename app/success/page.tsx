@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useCartStore } from "@/store/cart-store";
 import Breadcrumb from "@/components/breadcrumb";
-import { CheckBadgeIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 function SuccessPage() {
   const { clearCart } = useCartStore();

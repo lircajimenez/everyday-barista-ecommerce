@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { Button } from "@/components/ui/button";
 import hero from "@/public/hero-01.webp";
@@ -7,7 +8,7 @@ import CategoryCard from "@/components/category-card";
 import categories from "@/lib/categories";
 
 export default async function Home() {
-  const productsByCategory: { [category: string]: any[] } = {};
+  const productsByCategory: { [category: string]: Stripe.Product[] } = {};
   for (const category of categories) {
     const result = await stripe.products.search({
       query: `metadata['category']:'${category}'`,
