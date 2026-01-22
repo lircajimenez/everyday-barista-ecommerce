@@ -17,6 +17,9 @@ const Navbar = () => {
   const { items } = useCartStore();
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
+  // Common nav link classes with hover effect for border and text
+  const navLinkClasses = "relative border-b-2 border-transparent text-[#F1F3F3] text-xl font-extrabold tracking-wider hover:border-[#D98324] hover:text-[#D98324] transition-colors pb-1";
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -43,22 +46,29 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow">
+    <nav className="sticky top-0 z-50 bg-[#15100F] shadow">
       <div className="container mx-auto flex items-center justify-between px-4 py-2">
-        <Link className="hover:text-blue-600" href="/">
+        <Link href="/">
           <Image alt="Everyday Barista logo" width={60} height={60} src={logo} />
         </Link>
         <div className="hidden md:flex space-x-6">
-          <Link href="/">Homepage</Link>
-          <Link href="/">About Us</Link>
+          <Link href="/" className={navLinkClasses}>
+            Homepage
+          </Link>
+          <Link href="/" className={navLinkClasses}>
+            About Us
+          </Link>
           <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <Link className="hover:text-blue-600 flex items-center space-x-1" href="/products">
+            <Link
+              className={`flex items-center space-x-1 ${navLinkClasses}`}
+              href="/products"
+            >
               <span>Products</span>
               <ChevronDownIcon className="h-4 w-4" />
             </Link>
             {productsDropdownOpen && (
               <div
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-50 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50"
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-5 w-50 bg-[#15100F] rounded-md shadow-lg py-2 z-50"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
@@ -66,32 +76,26 @@ const Navbar = () => {
                   <Link
                     key={category}
                     href={`/products/category/${category}`}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors"
+                    className="block px-4 py-2 text-lg text-[#F1F3F3] hover:bg-[#D98324] transition-colors"
                   >
                     {formatDashString(category, true)}
                   </Link>
                 ))}
                 <div className="border-t border-gray-200 mt-2 pt-2">
-                  <Link
-                    href="/products"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors font-medium"
-                  >
+                  <Link href="/products" className="block px-4 py-2 text-lg text-[#F1F3F3] hover:bg-[#D98324] transition-colors font-medium">
                     View All Products
                   </Link>
                 </div>
               </div>
             )}
           </div>
-          <Link className="hover:text-blue-600" href="/checkout">
-            Checkout
-          </Link>
         </div>
         <div className="flex items-center space-x-4">
-          <Link className="relative" href="/products">
-            <MagnifyingGlassIcon className="h-6 w-6" />
+          <Link className="relative group" href="/products">
+            <MagnifyingGlassIcon className="h-6 w-6 text-[#F1F3F3] transition-colors group-hover:text-[#D98324]" />
           </Link>
-          <Link className="relative" href="/checkout">
-            <ShoppingCartIcon className="h-6 w-6" />
+          <Link className="relative group" href="/checkout">
+            <ShoppingCartIcon className="h-6 w-6 text-[#F1F3F3] transition-colors group-hover:text-[#D98324]" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                 {cartCount}
@@ -99,7 +103,7 @@ const Navbar = () => {
             )}
           </Link>
           <Button className="md:hidden" variant="ghost" onClick={() => setMobileOpen((prev) => !prev)}>
-            {mobileOpen ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+            {mobileOpen ? <XMarkIcon className="h-6 w-6 text-[#F1F3F3]" /> : <Bars3Icon className="h-6 w-6 text-[#F1F3F3]" />}
           </Button>
         </div>
       </div>
@@ -108,22 +112,24 @@ const Navbar = () => {
         <nav className="md:hidden bg-white shadow-md">
           <ul className="flex flex-col p-4 space-y-2">
             <li>
-              <Link href="/" className="block hover:text-blue-600">
+              <Link
+                href="/"
+                className="inline-block hover:text-black relative border-b-2 border-transparent hover:border-black transition-colors pb-1"
+              >
                 Home
               </Link>
             </li>
             <li>
               <div className="space-y-1">
-                <Link href="/products" className="block hover:text-blue-600">
+                <Link
+                  href="/products"
+                  className="inline-block hover:text-black relative border-b-2 border-transparent hover:border-black transition-colors pb-1"
+                >
                   Products
                 </Link>
                 <div className="ml-4 space-y-1">
                   {categories.map((category) => (
-                    <Link
-                      key={category}
-                      href={`/products/category/${category}`}
-                      className="block text-sm text-gray-600 hover:text-blue-600"
-                    >
+                    <Link key={category} href={`/products/category/${category}`} className="block text-sm text-gray-600 hover:text-black">
                       {formatDashString(category, true)}
                     </Link>
                   ))}
@@ -131,7 +137,10 @@ const Navbar = () => {
               </div>
             </li>
             <li>
-              <Link href="/checkout" className="block hover:text-blue-600">
+              <Link
+                href="/checkout"
+                className="inline-block hover:text-black relative border-b-2 border-transparent hover:border-black transition-colors pb-1"
+              >
                 Checkout
               </Link>
             </li>

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCartStore } from "@/store/cart-store";
 import checkoutAction from "./checkout-action";
 import Breadcrumb from "@/components/breadcrumb";
+import Link from "next/link";
 
 function CheckoutPage() {
   const { items, addItem, removeItem, clearCart } = useCartStore();
@@ -13,13 +14,15 @@ function CheckoutPage() {
 
   if (total === 0 || items.length === 0) {
     return (
-      <div>
-        <p>Your Cart is Empty.</p>
+      <div className="flex flex-col items-center mx-auto">
+        <p className="text-6xl font-bold mb-8">Your cart is currently empty.</p>
+        <p className="text-2xl mb-6">No beans, no brew. Let’s get you started ☕️</p>
+        <Button asChild className="mt-4 bg-black text-white cursor-pointer w-1/2">
+          <Link href="/products">Browse All Products</Link>
+        </Button>
       </div>
     );
   }
-
-  console.log(items);
 
   return (
     <>

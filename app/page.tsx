@@ -36,14 +36,11 @@ export default async function Home() {
             <Button className="rounded-full bg-white px-8 py-3 text-black hover:bg-gray-100">
               <Link href="/products">Browse All Products</Link>
             </Button>
-            {/* <Button variant="outline" className="rounded-full border-white text-white hover:bg-white hover:text-black">
-              <Link href="/about">Learn More</Link>
-            </Button> */}
           </div>
         </div>
       </section>
-      <section className="py-8">
-        <h2 className="text-2xl font-bold capitalize mb-5">Categories</h2>
+      <section className="py-40">
+        <h2 className="text-6xl text-center uppercase font-extrabold mb-5 pb-12 tracking-wider">Discover all our products</h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category) => {
             const product = productsByCategory[category][0];
