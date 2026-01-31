@@ -18,7 +18,7 @@ const Navbar = () => {
   const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
   // Common nav link classes with hover effect for border and text
-  const navLinkClasses = "relative border-b-2 border-transparent text-[#F1F3F3] text-xl font-extrabold tracking-wider hover:border-[#D98324] hover:text-[#D98324] transition-colors pb-1";
+  const navLinkClasses = "relative border-b-2 border-transparent text-[#F1F3F3] text-xl font-extrabold tracking-wider hover:border-[#EBA22C] hover:text-[#EBA22C] transition-colors pb-1";
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,9 +47,9 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-[#15100F] shadow">
-      <div className="container mx-auto flex items-center justify-between px-4 py-2">
+      <div className="container mx-auto flex items-center justify-between px-1 py-3">
         <Link href="/">
-          <Image alt="Everyday Barista logo" width={60} height={60} src={logo} />
+          <Image alt="Everyday Barista logo" width={50} height={50} src={logo} />
         </Link>
         <div className="hidden md:flex space-x-6">
           <Link href="/" className={navLinkClasses}>
@@ -76,13 +76,13 @@ const Navbar = () => {
                   <Link
                     key={category}
                     href={`/products/category/${category}`}
-                    className="block px-4 py-2 text-lg text-[#F1F3F3] hover:bg-[#D98324] transition-colors"
+                    className="block px-4 py-2 text-lg text-[#F1F3F3] hover:bg-[#EBA22C] transition-colors"
                   >
                     {formatDashString(category, true)}
                   </Link>
                 ))}
                 <div className="border-t border-gray-200 mt-2 pt-2">
-                  <Link href="/products" className="block px-4 py-2 text-lg text-[#F1F3F3] hover:bg-[#D98324] transition-colors font-medium">
+                  <Link href="/products" className="block px-4 py-2 text-lg text-[#F1F3F3] hover:bg-[#EBA22C] transition-colors font-medium">
                     View All Products
                   </Link>
                 </div>
@@ -92,10 +92,10 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <Link className="relative group" href="/products">
-            <MagnifyingGlassIcon className="h-6 w-6 text-[#F1F3F3] transition-colors group-hover:text-[#D98324]" />
+            <MagnifyingGlassIcon className="h-6 w-6 text-[#F1F3F3] transition-colors group-hover:text-[#EBA22C]" />
           </Link>
           <Link className="relative group" href="/checkout">
-            <ShoppingCartIcon className="h-6 w-6 text-[#F1F3F3] transition-colors group-hover:text-[#D98324]" />
+            <ShoppingCartIcon className="h-6 w-6 text-[#F1F3F3] transition-colors group-hover:text-[#EBA22C]" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                 {cartCount}
