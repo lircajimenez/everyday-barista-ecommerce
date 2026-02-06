@@ -9,6 +9,7 @@ async function CategoryPage({ params }: { params: Promise<{ category: string }> 
   // Search for products in the specified category
   const categoryProducts = await stripe.products.search({
     query: `metadata['category']:'${category}'`,
+    expand: ["data.default_price"],
   });
 
   // Convert to plain objects to avoid serialization issues

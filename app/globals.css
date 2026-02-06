@@ -121,3 +121,44 @@
     overflow-x: hidden;
   }
 }
+
+@layer components {
+  .underline-chase-link {
+    display: inline;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+
+    /* 1. Start: 0% width, anchored to the RIGHT */
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+
+    /* Transition both size and position */
+    /* background-position transition is what creates the "chase" on exit */
+    transition: background-size 0.3s ease-in-out, background-position 0.3s ease-in-out;
+
+    /* Distance from text */
+    padding-bottom: 2px;
+  }
+
+  .underline-chase-link:hover {
+    /* 2. Hover: 100% width, anchored to the LEFT */
+    background-size: 100% 1px;
+    background-position: 0% 100%;
+  }
+}
+
+/* @layer components {
+  .underline-chase {
+    @apply relative w-fit block;
+  }
+
+  .underline-chase::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-[1px] w-full bg-current;
+    @apply scale-x-0 origin-right transition-transform duration-300 ease-out;
+  }
+
+  .underline-chase:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+} */

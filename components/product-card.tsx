@@ -10,32 +10,34 @@ interface Props {
 
 function ProductCard({ product }: Props) {
   const price = product.default_price as Stripe.Price;
+  console.log("PRODUCT", product);
 
   return (
-    <Link className="block h-full" href={`/products/${product.id}`}>
-      <Card className="group hover:shadow-2xl transition duration-300 py-0 h-full flex flex-col border-gray-300 gap-0">
-        {product.images && product.images[0] && (
-          <div className="relative h-60 w-full">
-            <Image
-              className="group-hover:opacity-90 transition-opacity duration-300 rounded-t-lg"
-              fill={true}
-              objectFit="contain" //"cover" ?
-              alt={product.name}
-              src={product.images[0]}
-            />
-          </div>
-        )}
+    <Card className="group hover:shadow-xl transition duration-300 py-0 h-full flex flex-col border-gray-300 gap-0 bg-[#f4f4f5] overflow-hidden rounded-t-xl">
+      {product.images && product.images[0] && (
+        <Link className="relative h-60 w-full" href={`/products/${product.id}`}>
+          <Image
+            // className="group-hover:opacity-90 transition-opacity duration-300 rounded-t-lg"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+            fill={true}
+            objectFit="cover" //"cover" ?
+            alt={product.name}
+            src={product.images[0]}
+          />
+        </Link>
+      )}
 
-        <CardHeader className="p-4">
-          <CardTitle className="text-xl font-bold text-gray-800">{product.name}</CardTitle>
-        </CardHeader>
-        <CardContent className="p-4 flex-grow flex flex-col justify-between">
-          {product.description && <p className="text-gray-600 text-sm mb-2">{product.description}</p>}
-          {price && price.unit_amount && <p className="text-lg font-semibold text-gray-900">${(price.unit_amount / 100).toFixed(2)}</p>}
-          <Button className="mt-4 bg-black text-white">View Details</Button>
-        </CardContent>
-      </Card>
-    </Link>
+      <CardContent className="pt-4 pb-8 flex justify-between items-start">
+        <Link className="text-md font-medium text-gray-800 w-3/4" href={`/products/${product.id}`}>
+          <span className="underline-chase-link leading-relaxed">{product.name}</span>
+        </Link>
+        {/* {product.description && <p className="text-gray-600 text-sm mb-2">{product.description}</p>} */}
+        {price && price.unit_amount && (
+          <p className="text-sm font-light text-gray-900 w-1/4 text-end">${(price.unit_amount / 100).toFixed(2)}</p>
+        )}
+        {/* <Button className="mt-4 bg-black text-white">View Details</Button> */}
+      </CardContent>
+    </Card>
   );
 }
 

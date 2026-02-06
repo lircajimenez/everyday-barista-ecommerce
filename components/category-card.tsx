@@ -14,9 +14,9 @@ function CategoryCard({ product }: Props) {
     <Link className="block h-full" href={`/products/category/${category}`}>
       <Card className="group hover:shadow-2xl transition duration-300 rounded-xl border py-0 h-full flex flex-col border-gray-300 gap-0 ">
         {product.images && product.images[0] && (
-          <div className="relative h-60 w-full">
+          <div className="relative h-60 w-full overflow-hidden rounded-t-xl">
             <Image
-              className="group-hover:opacity-90 transition-opacity duration-300 rounded-t-lg"
+              className="object-cover transition-transform duration-300 ease-out group-hover:scale-110"
               layout="fill"
               objectFit="cover"
               alt={product.name}
